@@ -260,6 +260,7 @@ if idx < len(current_list):
     # 정답을 맞혔을 때만 나타나는 축하 메시지와 다음 버튼
     else:
         st.success(f"♥ 딩동댕! {ans} 정답입니다! ♥")
+        st.balloons()
         st.write(f"👏 정말 대단해 지안아! 벌써 {idx + 1}문제나 맞혔어!")
         if st.button("다음 문제 풀러 가기 ➡️"):
             st.session_state.current_idx += 1
