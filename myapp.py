@@ -23,7 +23,7 @@ st.markdown("""
         font-weight: bold;
     }
     </style>
-    """, unsafe_allow_html=trye)
+    """, unsafe_allow_html=True)
     
 st.title("🎮 아빠와 지안이의 포켓몬 퀴즈")
 
