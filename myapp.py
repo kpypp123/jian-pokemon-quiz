@@ -250,7 +250,7 @@ if idx < len(current_list):
         st.success(f"🔍 아빠의 찬스 4: 두 번째 글자는 **{middle_hint}'**(이)야!")
     if st.session_state.wrong_attempts >= 5:
         # 거의 정답에 가까운 힌트 (모음이나 자음 힌트 대신 아빠의 응원 메시지)
-        st.toats("과연 정답은 무엇일까요?")
+        st.toast("과연 정답은 무엇일까요?")
         st.markdown(f"🔍 아빠의 특급 찬스 5**:정답은 **{ans[0]}...{ans[-1]}** 같은거야. 더 생각해봐!")
 
     # 정답을 맞히기 전까지만 입력창을 보여줌
