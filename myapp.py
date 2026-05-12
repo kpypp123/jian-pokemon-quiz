@@ -6,16 +6,16 @@ st.markdown("""
     <style>
     /*전체 기본 글자 크기 조절*/
     html, body, [class*="css"] {
-        font-size: 24px;
+        font-size: 20px;
     }
     /* 힌트 박스 글자 크기 조절*/
     .stAlert p {
-        font-size: 28px !important;
+        font-size: 26px !important;
         font-weight: bold;
     }
     /* 입력창 글자 크기 조절 */
     input {
-        font-size: 30px !important;
+        font-size: 26px !important;
     }
     /* 버튼 글자 크기조절 */
     button p {
