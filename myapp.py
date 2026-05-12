@@ -214,60 +214,65 @@ quiz_list = [
     {"hint": "과거의 탈것처럼 생긴 팔데아 전설 포켓몬이야!", "answer": "코라이돈"},
     {"hint": "미래의 바이크처럼 생긴 팔데아 전설 포켓몬이야!", "answer": "미라이돈"}
 ]
+# 세션 상태 초기화
 if 'shuffled_list' not in st.session_state:
-    import random
     random.shuffle(quiz_list)
-    st.session_state.shuffled_list = quiz_list  # 섞인 리스트를 저장
-else:
-    quiz_list = st.session_state.shuffled_list  # 이미 섞었다면 저장된 걸 사용
-    
-# 2. 웹 브라우저용 퀴즈 실행 로직
+    st.session_state.shuffled_list = quiz_list
 if 'current_idx' not in st.session_state:
     st.session_state.current_idx = 0
 if 'wrong_attempts' not in st.session_state:
-    st.session_state.wrong_attempts = 0 # 틀린 횟수를 저장하는 변수
+    st.session_state.wrong_attempts = 0
+if 'correct_answer_given' not in st.session_state:
+    st.session_state.correct_answer_given = False
 
+current_list = st.session_state.shuffled_list
 idx = st.session_state.current_idx
 
-if idx < len(quiz_list):
-    q = quiz_list[idx]
+# 2. 퀴즈 실행 로직
+if idx < len(current_list):
+    q = current_list[idx]
     ans = q['answer']
     
+    st.write("---")
     st.info(f"💡 {idx+1}번 문제 힌트: {q['hint']}")
     
-    # --- 틀린 횟수에 따른 추가 힌트 표시 ---
+    # 틀린 횟수에 따른 힌트 표시
     if st.session_state.wrong_attempts >= 1:
         st.warning(f"🔍 아빠의 찬스 1: 이 포켓몬은 **{len(ans)}글자**야!")
-    
     if st.session_state.wrong_attempts >= 2:
         st.error(f"🔍 아빠의 찬스 2: 첫 글자는 **'{ans[0]}'**(으)로 시작해!")
-    # ----------------------------------
 
-    user_ans = st.text_input("정답을 입력하세요:", key=f"input_{idx}")
+    # 정답을 맞히기 전까지만 입력창을 보여줌
+    if not st.session_state.correct_answer_given:
+        user_ans = st.text_input("정답을 입력하세요:", key=f"input_{idx}")
+        
+        if st.button("정답 확인!"):
+            if user_ans.strip() == ans:
+                st.success(f"♥ 딩동댕! {ans} 정답입니다! ♥")
+                st.balloons()
+                st.session_state.correct_answer_given = True
+                st.rerun()
+            else:
+                st.session_state.wrong_attempts += 1
+                st.error("땡! 틀렸어 지안아 다시 해보자!")
+                st.rerun()
     
-if st.button("정답 확인!"):
-        if user_ans.strip() == ans:
-            # 1. 정답 성공 메시지와 풍선 효과
-            st.success(f"♥ 딩동댕! {ans} 정답입니다! ♥")
-            st.balloons()
-            
-            # 2. 정답을 맞힌 상태임을 기록 (다음 문제 버튼을 보여주기 위함)
-            st.session_state.correct_answer_given = True
-        else:
-            st.session_state.wrong_attempts += 1
-            st.error("땡! 틀렸어 지안아 다시 해보자!")
-            st.rerun()
-
-    # 정답을 맞혔을 때만 '다음 문제 풀기' 버튼 표시
-    if st.session_state.get('correct_answer_given', False):
+    # 정답을 맞혔을 때만 나타나는 축하 메시지와 다음 버튼
+    else:
+        st.success(f"♥ 딩동댕! {ans} 정답입니다! ♥")
         st.write(f"👏 정말 대단해 지안아! 벌써 {idx + 1}문제나 맞혔어!")
         if st.button("다음 문제 풀러 가기 ➡️"):
             st.session_state.current_idx += 1
             st.session_state.wrong_attempts = 0
-            st.session_state.correct_answer_given = False # 상태 초기화
+            st.session_state.correct_answer_given = False
             st.rerun()
+
 else:
-    st.success("🎉 축하합니다! 모든 문제를 다 맞혔어요! 역시 박지안 포켓몬 교수님!")
+    st.balloons()
+    st.success("🎉 모든 퀴즈를 다 풀었어요! 역시 박지안 포켓몬 교수님! 🎉")
     if st.button("처음부터 다시 하기"):
+        del st.session_state.shuffled_list
         st.session_state.current_idx = 0
+        st.session_state.wrong_attempts = 0
+        st.session_state.correct_answer_given = False
         st.rerun()
