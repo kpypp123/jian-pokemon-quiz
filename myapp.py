@@ -10,7 +10,7 @@ st.markdown("""
     }
     /* 힌트 박스 글자 크기 조절*/
     .stAlert p {
-        font-size: 26px !important;
+        font-size: 24px !important;
         font-weight: bold;
     }
     /* 입력창 글자 크기 조절 */
