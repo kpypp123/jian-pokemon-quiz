@@ -245,17 +245,27 @@ if idx < len(quiz_list):
 
     user_ans = st.text_input("정답을 입력하세요:", key=f"input_{idx}")
     
-    if st.button("정답 확인!"):
+   if st.button("정답 확인!"):
         if user_ans.strip() == ans:
-            st.success(f"♥ 딩동댕! {ans} 정답입니다! 포켓몬 교수 박지안 ♥")
+            # 1. 정답 성공 메시지와 풍선 효과
+            st.success(f"♥ 딩동댕! {ans} 정답입니다! ♥")
             st.balloons()
-            st.session_state.current_idx += 1
-            st.session_state.wrong_attempts = 0 # 정답을 맞히면 틀린 횟수 초기화
-            st.rerun()# <--- 버튼 대신 바로 다음 문제로 넘어가게 수정
+            
+            # 2. 정답을 맞힌 상태임을 기록 (다음 문제 버튼을 보여주기 위함)
+            st.session_state.correct_answer_given = True
         else:
-            st.session_state.wrong_attempts += 1 # 틀리면 횟수 증가
+            st.session_state.wrong_attempts += 1
             st.error("땡! 틀렸어 지안아 다시 해보자!")
-            st.rerun() # 화면을 새로고침해서 힌트가 바로 보이게 함
+            st.rerun()
+
+    # 정답을 맞혔을 때만 '다음 문제 풀기' 버튼 표시
+    if st.session_state.get('correct_answer_given', False):
+        st.write(f"👏 정말 대단해 지안아! 벌써 {idx + 1}문제나 맞혔어!")
+        if st.button("다음 문제 풀러 가기 ➡️"):
+            st.session_state.current_idx += 1
+            st.session_state.wrong_attempts = 0
+            st.session_state.correct_answer_given = False # 상태 초기화
+            st.rerun()
 else:
     st.success("🎉 축하합니다! 모든 문제를 다 맞혔어요! 역시 박지안 포켓몬 교수님!")
     if st.button("처음부터 다시 하기"):
