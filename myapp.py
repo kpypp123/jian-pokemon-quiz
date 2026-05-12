@@ -6,7 +6,7 @@ st.markdown("""
     <style>
     /*전체 기본 글자 크기 조절*/
     html, body, [class*="css"] {
-        font-size: 20px;
+        font-size: 18px;
     }
     /* 힌트 박스 글자 크기 조절*/
     .stAlert p {
