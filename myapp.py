@@ -224,24 +224,38 @@ else:
 # 2. 웹 브라우저용 퀴즈 실행 로직
 if 'current_idx' not in st.session_state:
     st.session_state.current_idx = 0
+if 'wrong_attempts' not in st.session_state:
+    st.session_state.wrong_attempts = 0 # 틀린 횟수를 저장하는 변수
 
 idx = st.session_state.current_idx
 
 if idx < len(quiz_list):
     q = quiz_list[idx]
+    ans = q['answer']
+    
     st.info(f"💡 {idx+1}번 문제 힌트: {q['hint']}")
     
-    # 지안이가 입력할 칸
+    # --- 틀린 횟수에 따른 추가 힌트 표시 ---
+    if st.session_state.wrong_attempts >= 1:
+        st.warning(f"🔍 아빠의 찬스 1: 이 포켓몬은 **{len(ans)}글자**야!")
+    
+    if st.session_state.wrong_attempts >= 2:
+        st.error(f"🔍 아빠의 찬스 2: 첫 글자는 **'{ans[0]}'**(으)로 시작해!")
+    # ----------------------------------
+
     user_ans = st.text_input("정답을 입력하세요:", key=f"input_{idx}")
     
     if st.button("정답 확인!"):
-        if user_ans.strip() == q['answer']:
-            st.success("♥ 딩동댕! 정답입니다! 다음 문제로 고고씽 ♥")
+        if user_ans.strip() == ans:
+            st.success(f"♥ 딩동댕! {ans} 정답입니다! 포켓몬 교수 박지안 ♥")
             st.balloons()
             st.session_state.current_idx += 1
-            st.button("다음 문제 풀기")
+            st.session_state.wrong_attempts = 0 # 정답을 맞히면 틀린 횟수 초기화
+            st.rerun()# <--- 버튼 대신 바로 다음 문제로 넘어가게 수정
         else:
+            st.session_state.wrong_attempts += 1 # 틀리면 횟수 증가
             st.error("땡! 틀렸어 지안아 다시 해보자!")
+            st.rerun() # 화면을 새로고침해서 힌트가 바로 보이게 함
 else:
     st.success("🎉 축하합니다! 모든 문제를 다 맞혔어요! 역시 박지안 포켓몬 교수님!")
     if st.button("처음부터 다시 하기"):
