@@ -1,7 +1,31 @@
 import random
 import streamlit as st
 
-st.title("🎮 아빠와 지안이의 포켓몬 무한 퀴즈")
+#---폰트 및 스타일 설전 (스타일 시트로 폰트 사이즈 추가)---
+st.markdown("""
+    <style>
+    /*전체 기본 글자 크기 조절*/
+    html, body, [class*="css"] {
+        font-size: 24px;
+    }
+    /* 힌트 박스 글자 크기 조절*/
+    .stAlert p {
+        font-size: 28px !important;
+        font-weight: bold;
+    }
+    /* 입력창 글자 크기 조절 */
+    input {
+        font-size: 30px !important;
+    }
+    /* 버튼 글자 크기조절 */
+    button p {
+        font-size: 26px !important;
+        font-weight: bold;
+    }
+    </style>
+    """, unsafe_allow_html=trye)
+    
+st.title("🎮 아빠와 지안이의 포켓몬 퀴즈")
 
 # 1. 준상님이 만드신 방대한 퀴즈 리스트 (괄호와 쉼표를 모두 정리했습니다)
 quiz_list = [
