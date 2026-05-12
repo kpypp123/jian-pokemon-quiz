@@ -245,7 +245,7 @@ if idx < len(quiz_list):
 
     user_ans = st.text_input("정답을 입력하세요:", key=f"input_{idx}")
     
-   if st.button("정답 확인!"):
+if st.button("정답 확인!"):
         if user_ans.strip() == ans:
             # 1. 정답 성공 메시지와 풍선 효과
             st.success(f"♥ 딩동댕! {ans} 정답입니다! ♥")
