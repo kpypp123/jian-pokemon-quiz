@@ -241,6 +241,17 @@ if idx < len(current_list):
         st.warning(f"🔍 아빠의 찬스 1: 이 포켓몬은 **{len(ans)}글자**야!")
     if st.session_state.wrong_attempts >= 2:
         st.error(f"🔍 아빠의 찬스 2: 첫 글자는 **'{ans[0]}'**(으)로 시작해!")
+    if st.session_state.wrong_attempts >= 3:
+        # 마지막 글자 힌트
+        st.info(f"🔍 아빠의 찬스 3: 마지막 글자는**{ans[-1]}'**이야!")
+    if st.session_state.wrong_attempts >= 4:
+        # 중간 글자 힌트 (글자 수가 3글자 이상일 떄만 작동)
+        middle_hint = ans[1] if len(ans) > 2 else "없음"
+        st.success(f"🔍 아빠의 찬스 4: 두 번째 글자는 **{middle_hint}'**(이)야!")
+    if st.session_state.wrong_attempts >= 5:
+        # 거의 정답에 가까운 힌트 (모음이나 자음 힌트 대신 아빠의 응원 메시지)
+        st.toats("과연 정답은 무엇일까요?")
+        st.markdown(f"🔍 아빠의 특급 찬스 5**:정답은 **{ans[0]}...{ans[-1]}** 같은거야. 더 생각해봐)
 
     # 정답을 맞히기 전까지만 입력창을 보여줌
     if not st.session_state.correct_answer_given:
@@ -248,18 +259,18 @@ if idx < len(current_list):
         
         if st.button("정답 확인!"):
             if user_ans.strip() == ans:
-                st.success(f"♥ 딩동댕! {ans} 정답입니다! ♥")
+                st.success(f"♥ 딩동댕! {ans} 정답입니다! 포켓몬 교수님~ ♥")
                 st.balloons()
                 st.session_state.correct_answer_given = True
                 st.rerun()
             else:
                 st.session_state.wrong_attempts += 1
-                st.error("땡! 틀렸어 지안아 다시 해보자!")
+                st.error("박지안 땡! 틀렸어 다시 해보자!")
                 st.rerun()
     
     # 정답을 맞혔을 때만 나타나는 축하 메시지와 다음 버튼
     else:
-        st.success(f"♥ 딩동댕! {ans} 정답입니다! ♥")
+        st.success(f"♥ 딩동댕! {ans} 정답입니다! 포켓몬 교수님~ ♥")
         st.balloons()
         st.write(f"👏 정말 대단해 지안아! 벌써 {idx + 1}문제나 맞혔어!")
         if st.button("다음 문제 풀러 가기 ➡️"):
