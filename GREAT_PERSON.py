@@ -25,7 +25,6 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.title("🎮 위인 인물 퀴즈")
 
 import streamlit as st
 from pathlib import Path
