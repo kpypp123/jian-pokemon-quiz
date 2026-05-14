@@ -166,7 +166,7 @@ def show_home():
             st.rerun()
 
 
-def show_great_person_quiz():
+def show_great_person():
     if st.button("🏠 홈으로"):
         st.session_state.page = "home"
         st.rerun()
