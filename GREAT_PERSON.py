@@ -282,7 +282,7 @@ def show_pokemon_quiz():
         st.rerun()
 
     st.divider()
-    pokemon_quiz.run()
+    myapp.run()
 
 
 def main():
@@ -296,7 +296,7 @@ def main():
     elif st.session_state.page == "great_person":
         show_great_person_quiz()
     elif st.session_state.page == "pokemon":
-        show_pokemon_quiz()
+        show_myapp()
     else:
         st.session_state.page = "home"
         st.rerun()
