@@ -27,6 +27,66 @@ st.markdown("""
 
 st.title("🎮 위인 인물 퀴즈")
 
+import streamlit as st
+from pathlib import Path
+
+st.set_page_config(
+    page_title="지안이 퀴즈",
+    page_icon="🎮",
+    layout="centered"
+)
+
+# 처음 접속하면 홈 화면으로 시작
+if "page" not in st.session_state:
+    st.session_state.page = "home"
+
+
+def show_home():
+    st.markdown(
+        """
+        <h1 style='text-align:center;'>🎮 지안이 퀴즈</h1>
+        <h3 style='text-align:center;'>재미있게 문제를 풀어보자!</h3>
+        """,
+        unsafe_allow_html=True
+    )
+
+    img_path = Path("images/home.png")
+
+    if img_path.exists():
+        st.image(str(img_path), use_container_width=True)
+    else:
+        st.info("images/home.png 파일을 넣으면 여기에 홈 화면 사진이 나와요.")
+
+    st.write("")
+    st.write("")
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col2:
+        if st.button("🚀 문제 풀러가기", use_container_width=True):
+            st.session_state.page = "quiz"
+            st.rerun()
+
+
+def show_quiz():
+    if st.button("🏠 홈으로"):
+        st.session_state.page = "home"
+        st.rerun()
+
+    st.divider()
+
+    # ↓↓↓ 여기 아래에 기존 퀴즈 코드를 넣으면 됨 ↓↓↓
+    st.title("퀴즈 화면")
+
+    # 예시
+    st.write("여기에 기존 포켓몬 퀴즈 또는 위인전 퀴즈 코드가 들어가면 돼.")
+
+
+if st.session_state.page == "home":
+    show_home()
+elif st.session_state.page == "quiz":
+    show_quiz()
+
 # 1. 퀴즈 리스트
 
 quiz_list = [
