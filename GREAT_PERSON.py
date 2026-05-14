@@ -112,7 +112,7 @@ def apply_style():
         """, unsafe_allow_html=True)
 
 
-def reset_pokemon_state():
+def reset_myapp_state():
     # pokemon_quiz.py에서 쓰는 세션 키 초기화
     for key in ["shuffled_list", "current_idx", "wrong_attempts", "correct_answer_given"]:
         if key in st.session_state:
@@ -276,7 +276,7 @@ def show_great_person_quiz():
             st.rerun()
 
 
-def show_pokemon_quiz():
+def show_myapp():
     if st.button("🏠 홈으로"):
         st.session_state.page = "home"
         st.rerun()
