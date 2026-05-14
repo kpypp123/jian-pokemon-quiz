@@ -155,13 +155,11 @@ def show_home():
 
     with col1:
         if st.button("👑 위인 퀴즈", use_container_width=True):
-            reset_pokemon_state()
             st.session_state.page = "great_person"
             st.rerun()
 
     with col2:
         if st.button("⚡ 포켓몬 퀴즈", use_container_width=True):
-            reset_great_person_state()
             st.session_state.page = "pokemon"
             st.rerun()
 
