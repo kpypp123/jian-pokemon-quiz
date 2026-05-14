@@ -294,8 +294,8 @@ def main():
     if st.session_state.page == "home":
         show_home()
     elif st.session_state.page == "great_person":
-        show_great_person_quiz()
-    elif st.session_state.page == "pokemon":
+        show_great_person()
+    elif st.session_state.page == "myapp":
         show_myapp()
     else:
         st.session_state.page = "home"
