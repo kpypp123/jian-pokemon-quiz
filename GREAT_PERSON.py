@@ -66,6 +66,10 @@ def show_home():
             st.session_state.page = "quiz"
             st.rerun()
 
+# 홈 화면이면 여기서 멈춤
+if st.session_state.page == "home":
+    show_home()
+    st.stop()
 
 def show_quiz():
     if st.button("🏠 홈으로"):
