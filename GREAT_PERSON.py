@@ -2,7 +2,7 @@ import random
 from pathlib import Path
 
 import streamlit as st
-import pokemon_quiz
+import myapp
 
 
 st.set_page_config(
