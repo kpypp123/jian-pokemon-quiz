@@ -74,17 +74,21 @@ def show_quiz():
 
     st.divider()
 
-    # ↓↓↓ 여기 아래에 기존 퀴즈 코드를 넣으면 됨 ↓↓↓
-    st.title("퀴즈 화면")
+    # 여기부터 퀴즈 화면
+    st.title("🎮 위인 인물 퀴즈")
 
-    # 예시
-    st.write("여기에 기존 포켓몬 퀴즈 또는 위인전 퀴즈 코드가 들어가면 돼.")
+    # 기존 위인 퀴즈 문제 코드는 여기 아래에 넣어야 함
+    st.write("여기에 기존 위인 퀴즈 코드 넣기")
 
 
 if st.session_state.page == "home":
     show_home()
+
 elif st.session_state.page == "quiz":
     show_quiz()
+
+
+
 
 # 1. 퀴즈 리스트
 
