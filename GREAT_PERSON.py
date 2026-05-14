@@ -1,5 +1,6 @@
 import random
 import streamlit as st
+from pathlib import Path
 
 #---폰트 및 스타일 설전 (스타일 시트로 폰트 사이즈 추가)---
 st.markdown("""
@@ -26,8 +27,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 
-import streamlit as st
-from pathlib import Path
+
 
 st.set_page_config(
     page_title="지안이 퀴즈",
