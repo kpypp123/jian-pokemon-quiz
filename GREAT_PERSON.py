@@ -29,7 +29,7 @@ st.title("🎮 위인 인물 퀴즈")
 
 # 1. 퀴즈 리스트
 
-QUIZ_LIST = [
+quiz_list = [
   {
     "hints": [
       "한글을 만든 조선의 왕이야!",
