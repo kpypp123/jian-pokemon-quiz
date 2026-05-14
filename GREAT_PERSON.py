@@ -30,7 +30,7 @@ st.markdown("""
 
 
 st.set_page_config(
-    page_title="지안이 퀴즈",
+    page_title="위인전 퀴즈",
     page_icon="🎮",
     layout="centered"
 )
@@ -43,7 +43,7 @@ if "page" not in st.session_state:
 def show_home():
     st.markdown(
         """
-        <h1 style='text-align:center;'>🎮 지안이 퀴즈</h1>
+        <h1 style='text-align:center;'>🎮 위인전 퀴즈</h1>
         <h3 style='text-align:center;'>재미있게 문제를 풀어보자!</h3>
         """,
         unsafe_allow_html=True
